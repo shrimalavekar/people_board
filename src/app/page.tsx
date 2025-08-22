@@ -102,13 +102,7 @@ export default function Home() {
     setCurrentScreen('login');
   };
 
-  const handleGoToUserEntry = () => {
-    setCurrentScreen('user-entry');
-  };
 
-  const handleGoToDashboard = () => {
-    setCurrentScreen('dashboard');
-  };
 
   if (loading) {
     return (

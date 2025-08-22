@@ -47,7 +47,6 @@ export function SignupScreen({ onSignup, onBackToLogin }: SignupScreenProps) {
       // Create user via server endpoint
       const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
       const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-      const projectId = supabaseUrl.split('//')[1].split('.')[0];
       
       const signupResponse = await fetch(
         `${supabaseUrl}/functions/v1/make-server-f328fde2/signup`,

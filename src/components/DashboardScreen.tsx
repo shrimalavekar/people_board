@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Search, Download, Filter, LogOut, RotateCcw, Plus, Calendar } from 'lucide-react';
+import { Search, Download, Filter, LogOut, RotateCcw, Calendar } from 'lucide-react';
 import { toast } from 'sonner';
 import type { User, UserEntry } from '@/types';
 
@@ -24,15 +24,8 @@ export function DashboardScreen({ user, accessToken, onLogout }: DashboardScreen
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 
-  useEffect(() => {
-    fetchEntries();
-  }, []);
-
-  useEffect(() => {
-    filterEntries();
-  }, [entries, searchTerm, dateFrom, dateTo]);
-
-  const fetchEntries = async () => {
+ 
+  const fetchEntries = useCallback(async () => {
     try {
       const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
       
@@ -57,9 +50,9 @@ export function DashboardScreen({ user, accessToken, onLogout }: DashboardScreen
     } finally {
       setLoading(false);
     }
-  };
+  }, [accessToken]);
 
-  const filterEntries = () => {
+  const filterEntries = useCallback(() => {
     let filtered = entries;
 
     // Text search
@@ -85,7 +78,7 @@ export function DashboardScreen({ user, accessToken, onLogout }: DashboardScreen
     }
 
     setFilteredEntries(filtered);
-  };
+  }, [entries, searchTerm, dateFrom, dateTo]);
 
   const handleReset = () => {
     setSearchTerm('');
@@ -119,6 +112,15 @@ export function DashboardScreen({ user, accessToken, onLogout }: DashboardScreen
     
     toast.success('CSV exported successfully!');
   };
+
+  useEffect(() => {
+    fetchEntries();
+  }, [fetchEntries]);
+
+  useEffect(() => {
+    filterEntries();
+  }, [entries, searchTerm, dateFrom, dateTo, filterEntries]);
+
 
   if (loading) {
     return (
