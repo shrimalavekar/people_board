@@ -94,7 +94,7 @@ export function LoginScreen({ onLogin, onGoToSignup }: LoginScreenProps) {
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
-          <div className="mt-6 text-center">
+          {/* <div className="mt-6 text-center">
             <p className="text-sm text-gray-600">
               Don&apos;t have an account?{' '}
               <button
@@ -107,7 +107,7 @@ export function LoginScreen({ onLogin, onGoToSignup }: LoginScreenProps) {
           </div>
           <div className="mt-4 text-sm text-muted-foreground text-center">
             Super Admins use the same login
-          </div>
+          </div> */}
         </CardContent>
       </Card>
     </div>
