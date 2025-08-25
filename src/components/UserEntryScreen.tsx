@@ -1,15 +1,13 @@
-"use client";
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { LogOut, User, Phone, MapPin, Save, RotateCcw } from 'lucide-react';
 import { toast } from 'sonner';
+import { projectId } from '@/utils/supabase/info';
 import type { User as UserType } from '@/types';
 
 interface UserEntryScreenProps {
@@ -51,10 +49,8 @@ export function UserEntryScreen({ user, accessToken, onLogout }: UserEntryScreen
         userId: user.id,
       };
 
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-      
       const response = await fetch(
-        `${supabaseUrl}/functions/v1/make-server-f328fde2/user-entries`,
+        `https://${projectId}.supabase.co/functions/v1/make-server-f328fde2/user-entries`,
         {
           method: 'POST',
           headers: {
@@ -97,12 +93,7 @@ export function UserEntryScreen({ user, accessToken, onLogout }: UserEntryScreen
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-lg font-medium text-gray-900">Add New Entry</h1>
-              <div className="flex items-center gap-2">
-                <p className="text-sm text-gray-500">Welcome, {user.email}</p>
-                <Badge variant="secondary" className="bg-green-100 text-green-800 border-green-200">
-                  {user.user_metadata?.role === 'super_admin' ? 'Super Admin' : 'User'}
-                </Badge>
-              </div>
+              <p className="text-sm text-gray-500">Welcome, {user.email}</p>
             </div>
             <Button
               variant="ghost"

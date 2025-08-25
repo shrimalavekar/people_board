@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { User, Shield, ArrowLeft } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { projectId, publicAnonKey } from '@/utils/supabase/info';
+import { supabase } from '@/utils/supabase/client';
 import type { User as UserType } from '@/types';
 
 interface SignupScreenProps {
@@ -45,16 +44,13 @@ export function SignupScreen({ onSignup, onBackToLogin }: SignupScreenProps) {
 
     try {
       // Create user via server endpoint
-      const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-      const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-      
       const signupResponse = await fetch(
-        `${supabaseUrl}/functions/v1/make-server-f328fde2/signup`,
+        `https://${projectId}.supabase.co/functions/v1/make-server-f328fde2/signup`,
         {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${supabaseAnonKey}`,
+            'Authorization': `Bearer ${publicAnonKey}`,
           },
           body: JSON.stringify({
             email,

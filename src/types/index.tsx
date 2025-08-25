@@ -13,5 +13,6 @@ export type UserEntry = {
   mobile: string;
   address: string;
   dateAdded: string;
+  dateModified?: string;
   userId: string;
 };

@@ -1,51 +1,119 @@
-# User Management System
+# Mobile-first User Management Web App
 
-A mobile-first user management application with authentication and role-based access control.
+A modern, mobile-first user management application built with Next.js, TypeScript, and Supabase.
 
 ## Features
 
-- **Authentication**: Secure login and signup with Supabase
-- **Role-based Access**: Super admin and regular user roles
-- **Dashboard**: Super admins can view and manage all user entries
-- **User Entry**: Regular users can add new entries
+- **Authentication**: Secure login and signup with Supabase Auth
+- **Role-based Access**: Different interfaces for regular users and super admins
+- **User Management**: Add, edit, and manage user entries
+- **Dashboard**: Comprehensive dashboard with search, filtering, and export capabilities
 - **Mobile-first Design**: Responsive design optimized for mobile devices
-- **Data Export**: CSV export functionality for super admins
+- **Modern UI**: Built with Radix UI components and Tailwind CSS
+
+## Tech Stack
+
+- **Framework**: Next.js 14 with App Router
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI
+- **Backend**: Supabase
+- **Authentication**: Supabase Auth
+- **Icons**: Lucide React
+- **Forms**: React Hook Form
+- **Notifications**: Sonner
+
+## Project Structure
+
+```
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── layout.tsx         # Root layout
+│   │   ├── page.tsx           # Home page
+│   │   └── globals.css        # Global styles
+│   ├── components/            # React components
+│   │   ├── ui/               # Reusable UI components
+│   │   ├── LoginScreen.tsx   # Login component
+│   │   ├── SignupScreen.tsx  # Signup component
+│   │   ├── UserEntryScreen.tsx # User entry form
+│   │   ├── DashboardScreen.tsx # Admin dashboard
+│   │   └── EditPersonDialog.tsx # Edit user dialog
+│   ├── utils/                # Utility functions
+│   │   └── supabase/        # Supabase configuration
+│   └── types/               # TypeScript type definitions
+├── public/                  # Static assets
+├── package.json            # Dependencies and scripts
+├── next.config.js          # Next.js configuration
+├── tailwind.config.js      # Tailwind CSS configuration
+├── tsconfig.json           # TypeScript configuration
+└── README.md              # Project documentation
+```
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
+- Node.js 18+ 
+- npm or yarn
+- Supabase account and project
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd mobile-first-user-management-web-app
+```
+
+2. Install dependencies:
+```bash
+npm install
+```
+
+3. Set up environment variables:
+Create a `.env.local` file in the root directory:
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url_here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+```
+
+4. Update Supabase configuration:
+Update the Supabase configuration in `src/utils/supabase/info.tsx` with your project details.
+
+5. Run the development server:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Environment Variables
+## Available Scripts
 
-Make sure to set up your Supabase environment variables:
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-```
+## Deployment
 
-## User Roles
+The application can be deployed to various platforms:
 
-- **Super Admin**: Can access dashboard to view all entries and export data
-- **Regular User**: Can only add new user entries
+- **Vercel** (Recommended for Next.js)
+- **Netlify**
+- **Railway**
+- **AWS Amplify**
 
-## Technologies Used
+Make sure to set the environment variables in your deployment platform.
 
-- Next.js 15
-- React 19
-- TypeScript
-- Tailwind CSS
-- Supabase (Authentication & Database)
-- Radix UI Components
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+  
